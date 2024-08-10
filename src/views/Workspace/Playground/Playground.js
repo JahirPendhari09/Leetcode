@@ -100,7 +100,10 @@ const Playground = ({ problem,setSolved }) => {
                 setNumOfTestCsesShow(problem.examples.length)
                 setOutput(true)
         
-            }).catch(err => err)
+            }).catch(err => {
+                setCodeError(true)
+                return err
+            })
         }
     }
     const handleRun = async () => {
@@ -110,7 +113,6 @@ const Playground = ({ problem,setSolved }) => {
             alert("Python language is not supported for the given question.");
         } else {
             setYourOutput('')
-            
             const payload = {
                 'language': language.value,
                 'code': userCode,
@@ -124,7 +126,10 @@ const Playground = ({ problem,setSolved }) => {
                 setStatus(allPassed ? 'Accepted' : 'Wrong Answer')
                 setNumOfTestCsesShow(2)
                 setOutput(true)
-            }).catch(err => err)
+            }).catch(err => {
+                setCodeError(true)
+                return err
+            })
         }
     }
 

@@ -35,8 +35,8 @@ const ProblemDescription = ({ problem, _solved }) => {
 							</div>
 						</div>
 						<div className='flex items-center mt-3 mb-6'>
-							<div className={` text-xl inline-block  px-2.5  font-medium capitalize ${problem.dificulty === "Easy" ? 'text-green-500' : (problem.dificulty === 'Medium' ? 'text-yellow-600' : 'text-red-600')} `}>
-								{problem !== "" ? problem.dificulty || problem.dificulty : 'Easy'}
+							<div className={` text-xl inline-block  px-2.5  font-medium capitalize ${problem.difficulty === "Easy" ? 'text-green-500' : (problem.difficulty === 'Medium' ? 'text-yellow-600' : 'text-red-600')} `}>
+								{problem !== "" ? problem.difficulty || problem.difficulty : 'Easy'}
 							</div>
 							<div className='flex items-center cursor-pointer space-x-4 rounded p-[3px]  ml-4 text-lg text-white'>
 								<div onClick={handleLike}>

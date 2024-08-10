@@ -1,8 +1,8 @@
 import axios from "axios"
 
-export const fetchProblem = (topic)=>{
+export const fetchProblem = (name)=>{
     return (
-        axios.post('http://127.0.0.1:5000/questions/generate-coding-question',{"topic": topic})
+        axios.post('http://localhost:4500/problem/generate-problem',{"name": name})
        .then(res =>  res)
        .catch(err => err )
     )
@@ -10,7 +10,7 @@ export const fetchProblem = (topic)=>{
 
 export const postCode = ( payload )=>{
     return (
-        axios.post('http://127.0.0.1:5000/run-code/',payload)
+        axios.post('http://localhost:4500/run-code/',payload)
         .then(res => res)
         .catch(err => err)
     )
