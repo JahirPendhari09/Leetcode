@@ -28,9 +28,9 @@ const Timer = () => {
   return (
     <div>
       {showTimer ? (
-        <div className='flex items-center space-x-2  p-1.5 cursor-pointer rounded text-white'>
+        <div className='flex items-center space-x-2  p-1.5 cursor-pointer rounded text-white '>
           <div>{formatTime(time)}</div>
-          <FiRefreshCcw color='white'
+          <FiRefreshCcw 
             onClick={() => {
               setShowTimer(false);
               setTime(0);
@@ -49,7 +49,6 @@ const Timer = () => {
             height='1em'
             fill='currentColor'
             className='h-6 w-6'
-            color='white'
           >
             <path
               fillRule='evenodd'
