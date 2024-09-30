@@ -10,10 +10,9 @@ const Workspace = ( ) => {
 	const [solved, setSolved] = useState(false)
 	const [problem, setProblem] = useState('')
 	const { problemName } = useParams()
-	const [activeProblemName, setActiveProblemName] = useState(problemName)
 	const [isLoading, setIsLoading] = useState(true)
 	const getToProblem = () => {
-		fetchProblem(activeProblemName).then(res => {
+		fetchProblem(problemName).then(res => {
 			res.data.length <= 0 ? setProblem(dummyQuestion) : setProblem(res.data[0])
 			setIsLoading(false)
 		})
@@ -24,12 +23,12 @@ const Workspace = ( ) => {
 	}
 
 	useEffect(() => {
-		if (activeProblemName) {
+		if (problemName) {
 			getToProblem()
 		}
-	}, [activeProblemName])
+	}, [problemName])
 
-	if (isLoading && activeProblemName) return <h1 className="text-3xl">Problem Loading....</h1>
+	if (isLoading && problemName) return <h1 className="text-3xl">Problem Loading....</h1>
 
 	return (
 	  <>
