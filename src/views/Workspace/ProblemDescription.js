@@ -44,8 +44,8 @@ const ProblemDescription = ({ problem, _solved }) => {
 								 {problem !== "" && problem.name ? problem.name : 'Two Sum'}
 							</div>
 						</div>
-						<div className='flex items-center mt-3 mb-6'>
-							<div className={` text-sm p-1  rounded-xl bg-neutral-700 inline-block  px-2.5  font-medium capitalize ${problem.difficulty === "Easy" ? 'text-[#14b8a6]' : (problem.difficulty === 'Medium' ? 'text-yellow-600' : 'text-red-600')} `}>
+						<div className='flex items-center mt-2 mb-2'>
+							<div className={`text-sm font-medium capitalize ${problem.difficulty === "Easy" ? 'text-[#14b8a6]' : (problem.difficulty === 'Medium' ? 'text-yellow-600' : 'text-red-600')} `}>
 								{problem !== "" ? problem.difficulty || problem.difficulty : 'Easy'}
 							</div>
 
@@ -62,7 +62,6 @@ const ProblemDescription = ({ problem, _solved }) => {
 								return <div className='mt-4' key={currProblem.id}>
 									<div >
 										<p className='font-medium text-white '>Example {index + 1}: </p>
-										<img src='' alt='' className='mt-3' />
 										<div className='example-card'>
 											<pre>
 												<strong className='text-white'>Input:</strong>
@@ -94,7 +93,7 @@ const ProblemDescription = ({ problem, _solved }) => {
 					</div>
 				</div>
 				<div className=" h-10 w-full ">
-					<div className='h-full flex items-center cursor-pointer pl-2  text-neutral-400 font-medium'>
+					<div className='h-full text-sm flex items-center cursor-pointer pl-2  text-neutral-400 font-medium'>
 						<div className=" flex items-center w-20 px-2 gap-2 h-4/5 bg-neutral-600 rounded-tl-lg rounded-bl-lg  " onClick={handleLike}>
 							<AiOutlineLike className='text-dark-blue' color={updating.likes ? 'blue' : ''} />
 							<p>54.5K</p>

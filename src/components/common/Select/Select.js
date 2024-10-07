@@ -33,7 +33,7 @@ export const SelectDropdown = ({ value, setValue, options }) => {
 			placeholder={value.label}
 			options={options}
 			value={value}
-			className="w-[130px] rounded"
+			className="w-[130px] rounded text-sm bg-neutral-500"
 			styles={customStyles}
 			onChange={(e) => {
 				setValue(e);
