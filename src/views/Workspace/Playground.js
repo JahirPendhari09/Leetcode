@@ -78,6 +78,9 @@ const Playground = ({ problem, setSolved }) => {
     }
 
     const handleSubmit = async () => {
+        if (language.value !== 'javascript') {
+            return alert(`${language.label} is not supported for production. We are currently working on it.`);
+        }
         const functionsAndParameter = extractFunctionInfo(userCode)
         if (functionsAndParameter.name === 'has_cycle' && language.value === 'python') {
             alert("Python language is not supported for the given question.");
@@ -101,10 +104,13 @@ const Playground = ({ problem, setSolved }) => {
                 setOutput(true)
                 setRuncodeLoading(false)
 
-            }).catch(err => err)
+            }).catch(err => setRuncodeLoading(false))
         }
     }
     const handleRun = async () => {
+        if (language.value !== 'javascript') {
+            return alert(`${language.label} is not supported for production. We are currently working on it.`);
+        }
         const functionsAndParameter = extractFunctionInfo(userCode)
         if (functionsAndParameter.name === 'has_cycle' && language.value === 'python') {
             alert("Python language is not supported for the given question.");
@@ -127,7 +133,7 @@ const Playground = ({ problem, setSolved }) => {
                 setNumOfTestCsesShow(2)
                 setOutput(true)
                 setRuncodeLoading(false)
-            }).catch(err => err)
+            }).catch(err => setRuncodeLoading(false))
         }
     }
 
