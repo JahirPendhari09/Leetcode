@@ -96,3 +96,8 @@ code {
   color: white;
   font-size: 1rem;
 }
+
+.scroll::-webkit-scrollbar {
+  display: none;
+  scroll-behavior: smooth;
+}
