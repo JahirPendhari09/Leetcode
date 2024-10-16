@@ -50,18 +50,18 @@ const Problems = () => {
                                 </div>
                             ))}
                         </div>
-                        <div className='w-full'>
-                            <table className='w-full  mt-4'>
-                                <thead className='w-full text-left font-normal '>
+                        <div className='w-full scroll overflow-x-scroll '>
+                            <table className='w-full mt-4'>
+                                <thead className='w-full text-left font-normal overflow-scroll '>
                                     <tr className='p-2 text-neutral-400 border-b-[1px]  border-neutral-600'>
-                                        <th className='p-4'>Status</th>
-                                        <th className='w-2/5'>Title</th>
-                                        <th>Acceptance</th>
-                                        <th>Difficulty</th>
-                                        <th>Frequency</th>
+                                        <th className='p-4 min-w-[100px]'>Status</th>
+                                        <th className='w-2/5 min-w-[200px]'>Title</th>
+                                        <th className='min-w-[120px]'>Acceptance</th>
+                                        <th className='min-w-[120px]'>Difficulty</th>
+                                        <th className='min-w-[120px]'>Frequency</th>
                                     </tr>
                                 </thead>
-                                <tbody className='text-left text-[16px] '>
+                                <tbody className='text-left text-[16px]'>
                                     {
                                         problems.map((problem) => (
                                             <ProblemCard  {...problem} key={problem.id}/>

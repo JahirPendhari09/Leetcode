@@ -33,7 +33,7 @@ const Workspace = ( ) => {
 	return (
 	  <>
 		<div className="overflow-hidden bg-black p-1 ma">
-		  <Split className='split bg-black'  direction='horizontal' sizes={[45, 55]} minSize={50}>
+		  <Split className='split bg-black' direction='horizontal' sizes={ window.innerWidth < 768 ? [98,2] : [45, 55]} minSize={window.innerWidth < 768 ? 10 : 100}>
 		    <ProblemDescription problem={problem} _solved={solved} />
 			<div className="h-[600px] ">
 			  <Playground problem={problem} setSolved={setSolved} />

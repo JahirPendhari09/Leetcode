@@ -19,7 +19,7 @@ const Header = () => {
   return (
     <nav className={`relative flex  w-full shrink-0 items-center  ${problemExist ? 'h-[50px] px-2' :' h-[50px] bg-neutral-800 border-b border-neutral-600  px-5 '}  text-neutral-400`}>
       <div className={`flex w-full items-center justify-between ${problemExist ? '' : 'max-w-[1150px]'}  mx-auto  p-1 `}>
-        <div className=' sm:grid md:flex lg:flex gap-6 justify-center items-center text-[16px]  font-medium '>
+        <div className='hidden md:flex lg:flex gap-6 justify-center items-center text-[16px] font-medium'>
           <Link to='/'> 
             <img  src='https://upload.wikimedia.org/wikipedia/commons/8/8e/LeetCode_Logo_1.png' className='w-8 h-8'/>
           </Link>
@@ -43,6 +43,11 @@ const Header = () => {
               <Link to='/problemset' className='-ml-3'><IoIosArrowForward /></Link>
             </>
           }
+        </div>
+        <div className='md:hidden sm:flex lg:hidden'>
+          <Link to='/'> 
+            <img  src='https://upload.wikimedia.org/wikipedia/commons/8/8e/LeetCode_Logo_1.png' className='w-8 h-8'/>
+          </Link>
         </div>
         <div className='flex items-center space-x-4 flex-1 justify-end'>
           {problemExist && <Timer />}
