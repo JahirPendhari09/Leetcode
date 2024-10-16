@@ -26,6 +26,9 @@ The application is deployed on netlify and can be accessed [here](https://leetco
 
 ![Screenshot (1084)](https://github.com/user-attachments/assets/a625e697-3672-491c-8ab8-0a4fc7d7418a)
 
+## Performance and Lighthouse Score's
+
+![Screenshot (1096)](https://github.com/user-attachments/assets/83a81493-c761-48ca-b98f-75316ac2783a)
 
 
  # How to Run <br/>
