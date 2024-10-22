@@ -38,6 +38,7 @@ export const SelectDropdown = ({ value, setValue, options }) => {
 			onChange={(e) => {
 				setValue(e);
 			}}
+			label=''
 		/>
 	);
 }

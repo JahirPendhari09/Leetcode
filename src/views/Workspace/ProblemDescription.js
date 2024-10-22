@@ -96,7 +96,7 @@ const ProblemDescription = ({ problem, _solved }) => {
 					<div className='h-full text-sm flex items-center cursor-pointer pl-2  text-neutral-400 font-medium'>
 						<div className=" flex items-center w-20 px-2 gap-2 h-4/5 bg-neutral-600 rounded-tl-lg rounded-bl-lg  " onClick={handleLike}>
 							<AiOutlineLike className='text-dark-blue' color={updating.likes ? 'blue' : ''} />
-							<p>54.5K</p>
+							<p className="text-white">54.5K</p>
 						</div>
 						<div className=" ml-[1px] flex items-center w-8 px-2 gap-2 h-4/5 bg-neutral-600 rounded-tr-lg rounded-br-lg   "  onClick={handleDislike}>
 							{<AiOutlineDislike color={updating.dislikes ? 'blue' : ''} />}
