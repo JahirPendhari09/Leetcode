@@ -21,7 +21,7 @@ const Header = () => {
       <div className={`flex w-full items-center justify-between ${problemExist ? '' : 'max-w-[1150px]'}  mx-auto  p-1 `}>
         <div className='hidden md:flex lg:flex gap-6 justify-center items-center text-[16px] font-medium'>
           <Link to='/'> 
-            <img  src='https://upload.wikimedia.org/wikipedia/commons/8/8e/LeetCode_Logo_1.png' className='w-8 h-8'/>
+            <img  src='https://upload.wikimedia.org/wikipedia/commons/8/8e/LeetCode_Logo_1.png' className='w-8 h-8'  alt='link'/>
           </Link>
           {
             !problemExist ? <>
