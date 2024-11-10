@@ -4,3 +4,9 @@ export const login = (userdata) => (dispatch) => {
         dispatch({type:"SUCCESS", payload:'1'})
     )
 }
+
+export const changeTab = (tab) => (dispatch) => {
+    return (
+        dispatch({type: 'CHANGE_TAB', payload: tab})
+    )
+}
