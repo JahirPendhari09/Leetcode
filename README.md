@@ -16,7 +16,7 @@ This repository contains the code for Leetcode clone App using React and tailwin
 
 ## Deployment
 
-The application is deployed on netlify and can be accessed [leetcode-by-jahir.netlify.app/](https://leetcode-by-jahir.netlify.app/).
+The application is deployed on netlify and can be accessed [leetcode-by-jahir.netlify.app/](https://leetcode-by-jahirp.netlify.app/).
 
 ## Landing Page
 
