@@ -20,7 +20,8 @@ The application is deployed on netlify and can be accessed [leetcode-by-jahir.ne
 
 ## Landing Page
 
-![Screenshot (1083)](https://github.com/user-attachments/assets/946d05b1-012a-48ed-9a26-05add2743d41)
+![Screenshot (1261)](https://github.com/user-attachments/assets/4734fd88-82b4-44ff-ae20-bb945ffaac2c)
+
 
 ## Problem Page
 
