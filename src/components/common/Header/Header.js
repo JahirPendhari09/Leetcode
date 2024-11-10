@@ -5,9 +5,14 @@ import { LuListTodo } from "react-icons/lu"
 import Timer from '../Timer/Timer';
 import avatar from '../../../images/Jahir_Image.png'
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { useDispatch, useSelector } from 'react-redux';
+import { changeTab } from '../../../redux/action';
 
 const Header = () => {
-  const [tab, setTab] = useState(1)
+  const dispatch = useDispatch()
+  const store = useSelector(store => store.reducer)
+  // const [tab, setTab] = useState(store.currTab)
+  const tab = store.currTab
   const location = useLocation()
   const [problemExist , setProblemExist] = useState(false)
 
@@ -16,20 +21,23 @@ const Header = () => {
     pathname.includes('/problemset/') ? setProblemExist(true) : setProblemExist(false)
   }, [location])
  
+  const handleTab = (selectedTab) => {
+    dispatch(changeTab(selectedTab))
+  }
   return (
     <nav className={`relative flex  w-full shrink-0 items-center  ${problemExist ? 'h-[50px] px-2' :' h-[50px] bg-neutral-800 border-b border-neutral-600  px-5 '}  text-neutral-400`}>
       <div className={`flex w-full items-center justify-between ${problemExist ? '' : 'max-w-[1150px]'}  mx-auto  p-1 `}>
         <div className='hidden md:flex lg:flex gap-6 justify-center items-center text-[16px] font-medium'>
           <Link to='/'> 
-            <img  src='https://upload.wikimedia.org/wikipedia/commons/8/8e/LeetCode_Logo_1.png' className='w-8 h-8'/>
+            <img  src='https://upload.wikimedia.org/wikipedia/commons/8/8e/LeetCode_Logo_1.png' className='w-8 h-8'  alt='link'/>
           </Link>
           {
             !problemExist ? <>
-              <Link to='/' className={`${tab == 1? 'tabs' : ''}`} onClick={()=> setTab(1)}>Explore</Link>
-              <Link to='/problemset' className={`${tab == 2? 'tabs' : ''}`} onClick={()=> setTab(2)}>Problems</Link>
-              <Link to='/' className={`${tab == 3? 'tabs' : ''}`} onClick={()=> setTab(3)}>Contest</Link>
-              <Link to='/' className={`${tab == 4? 'tabs' : ''}`} onClick={()=> setTab(4)}>Discuss</Link>
-              <Link to='/' className={`${tab == 5? 'tabs' : ''}`} onClick={()=> setTab(5)}>Interview</Link>
+              <Link to='/' className={`${tab == 1? 'tabs' : ''}`} onClick={()=> handleTab(1)}>Explore</Link>
+              <Link to='/problemset' className={`${tab == 2? 'tabs' : ''}`} onClick={()=> handleTab(2)}>Problems</Link>
+              <Link to='/' className={`${tab == 3? 'tabs' : ''}`} onClick={()=> handleTab(3)}>Contest</Link>
+              <Link to='/' className={`${tab == 4? 'tabs' : ''}`} onClick={()=> handleTab(4)}>Discuss</Link>
+              <Link to='/' className={`${tab == 5? 'tabs' : ''}`} onClick={()=> handleTab(5)}>Interview</Link>
               <div className='flex gp-4 items-center text-yellow-600 '>
                 <Link to='/'>Store </Link>
                 <span> <MdOutlineKeyboardArrowDown /></span>
@@ -38,7 +46,7 @@ const Header = () => {
             : 
             <>
               <Link to='/'><LuListTodo/></Link>
-              <Link to='/problemset' className='text-white text-[16px] -ml-3' onClick={()=> setTab(2)}>Problem List</Link>
+              <Link to='/problemset' className='text-white text-[16px] -ml-3' onClick={()=> handleTab(2)}>Problem List</Link>
               <Link to='/problemset' className='-ml-3'><IoIosArrowBack /></Link>
               <Link to='/problemset' className='-ml-3'><IoIosArrowForward /></Link>
             </>

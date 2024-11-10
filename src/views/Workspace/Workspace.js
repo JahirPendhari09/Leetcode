@@ -5,6 +5,7 @@ import { dummyQuestion } from "../../static/editor"
 import ProblemDescription from "./ProblemDescription"
 import { fetchProblem } from "../../services/platform"
 import { useParams } from "react-router-dom"
+import Loader from "../../components/common/Loader"
 
 const Workspace = ( ) => {
 	const [solved, setSolved] = useState(false)
@@ -28,7 +29,9 @@ const Workspace = ( ) => {
 		}
 	}, [problemName])
 
-	if (isLoading && problemName) return <h1 className="text-3xl">Problem Loading....</h1>
+	if (isLoading && problemName){
+		return <Loader/>
+	} 
 
 	return (
 	  <>
