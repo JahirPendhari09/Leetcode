@@ -27,6 +27,16 @@ The application is deployed on netlify and can be accessed [leetcode-by-jahir.ne
 
 ![Screenshot (1084)](https://github.com/user-attachments/assets/a625e697-3672-491c-8ab8-0a4fc7d7418a)
 
+## Sign In Page
+
+![Screenshot (1373)](https://github.com/user-attachments/assets/373bde27-5739-402a-8a7b-fd1c03d707ea)
+
+
+## Sign Up Page
+
+![Screenshot (1372)](https://github.com/user-attachments/assets/f800431f-6e98-4092-97a8-6af3d203e6f3)
+
+
 ## Performance and Lighthouse Score's
 
 ![Screenshot (1096)](https://github.com/user-attachments/assets/83a81493-c761-48ca-b98f-75316ac2783a)
