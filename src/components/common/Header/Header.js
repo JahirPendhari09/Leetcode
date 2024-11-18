@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import {IoIosArrowBack, IoIosArrowForward } from "react-icons/io"
 import { LuListTodo } from "react-icons/lu"
 import Timer from '../Timer/Timer';
@@ -11,10 +11,11 @@ import { changeTab } from '../../../redux/action';
 const Header = () => {
   const dispatch = useDispatch()
   const store = useSelector(store => store.reducer)
-  // const [tab, setTab] = useState(store.currTab)
+  const navigate = useNavigate()
   const tab = store.currTab
   const location = useLocation()
   const [problemExist , setProblemExist] = useState(false)
+  const auth = useSelector(store => store.reducer.auth)
 
   useEffect(() => {
     const { pathname } = location
@@ -23,6 +24,12 @@ const Header = () => {
  
   const handleTab = (selectedTab) => {
     dispatch(changeTab(selectedTab))
+  }
+  const handleLoginClick = () => {
+    navigate('/login' ,{ state: { from: location } }  )
+  }
+  const handleSignupClick = () => {
+    navigate('/signup' ,{ state: { from: location } }  )
   }
   return (
     <nav className={`relative flex  w-full shrink-0 items-center  ${problemExist ? 'h-[50px] px-2' :' h-[50px] bg-neutral-800 border-b border-neutral-600  px-5 '}  text-neutral-400`}>
@@ -33,11 +40,11 @@ const Header = () => {
           </Link>
           {
             !problemExist ? <>
-              <Link to='/' className={`${tab == 1? 'tabs' : ''}`} onClick={()=> handleTab(1)}>Explore</Link>
+              <Link to='/' className={`${tab === 1? 'tabs' : ''}`} onClick={()=> handleTab(1)}>Explore</Link>
               <Link to='/problemset' className={`${tab == 2? 'tabs' : ''}`} onClick={()=> handleTab(2)}>Problems</Link>
-              <Link to='/' className={`${tab == 3? 'tabs' : ''}`} onClick={()=> handleTab(3)}>Contest</Link>
-              <Link to='/' className={`${tab == 4? 'tabs' : ''}`} onClick={()=> handleTab(4)}>Discuss</Link>
-              <Link to='/' className={`${tab == 5? 'tabs' : ''}`} onClick={()=> handleTab(5)}>Interview</Link>
+              <Link to='/' className={`${tab === 3? 'tabs' : ''}`} onClick={()=> handleTab(3)}>Contest</Link>
+              <Link to='/' className={`${tab === 4? 'tabs' : ''}`} onClick={()=> handleTab(4)}>Discuss</Link>
+              <Link to='/' className={`${tab === 5? 'tabs' : ''}`} onClick={()=> handleTab(5)}>Interview</Link>
               <div className='flex gp-4 items-center text-yellow-600 '>
                 <Link to='/'>Store </Link>
                 <span> <MdOutlineKeyboardArrowDown /></span>
@@ -58,10 +65,17 @@ const Header = () => {
           </Link>
         </div>
         <div className='flex items-center space-x-4 flex-1 justify-end'>
-          {problemExist && <Timer />}
-          <div className='cursor-pointer group relative'>
-            <img src={avatar} alt='Avatar' width={26} height={26} className='rounded-full' />
-          </div>
+          { problemExist && <Timer />}
+          { auth 
+                ? <div className='cursor-pointer group relative'>
+                    <img src={avatar} alt='Avatar' width={26} height={26} className='rounded-full' />
+                  </div>
+                : <div className='p-2 rounded-md flex gap-2'>
+                    <div className='cursor-pointer' onClick={handleSignupClick}>Register</div>
+                    <div>or</div>
+                    <div className='cursor-pointer' onClick={handleLoginClick}>Sign in</div>
+                  </div> 
+          }
           <div className=' p-[5px] rounded-md font-medium bg-[#ffa11633] hover:bg-[#ffa1173f]  text-amber-500'>
             <a
               href='https://www.buymeacoffee.com/burakorkmezz'

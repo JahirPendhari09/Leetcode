@@ -1,0 +1,4 @@
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
+
+export const CHANGE_TAB = 'CHANGE_TAB'
