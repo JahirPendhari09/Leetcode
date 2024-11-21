@@ -5,8 +5,8 @@ import Header from "../components/common/Header/Header";
 import { RecoilRoot } from "recoil";
 import Workspace from "../views/Workspace/Workspace";
 import Login from "../views/Login";
-import PrivateRoute from "../PrivateRoute";
 import Problems from "../views/Problems";
+import Signup from "../views/Signup";
 
 const Allroutes = () => {
   return (
@@ -15,9 +15,9 @@ const Allroutes = () => {
       <Routes>
         <Route path="/" element={<Homepage/>}/>
         <Route path="/problemset" element={<Problems/>} />
-        <Route path="/problemset/:problemName" element={<PrivateRoute><RecoilRoot><Workspace/></RecoilRoot> </PrivateRoute>}/>
-        {/* <Route path="/platform" element={<PrivateRoute><RecoilRoot><Workspace/></RecoilRoot> </PrivateRoute>} /> */}
+        <Route path="/problemset/:problemName" element={<RecoilRoot><Workspace/></RecoilRoot>}/>
         <Route path="/login" element={<Login/>} />
+        <Route path="/signup" element={<Signup/>} />
       </Routes>
     </>
   );

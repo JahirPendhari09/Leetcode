@@ -11,7 +11,7 @@ import { BsPatchCheckFill } from "react-icons/bs";
 const ImageItem = ({ src }) => {
     return (
         <div className='w-full rounded-xl bg-neutral-800 h-30 cursor-pointer overflow-hidden'>
-            <img src={src} alt='image' className='w-full h-full' loading="lazy" />
+            <img src={src} alt='logo-image' className='w-full h-full' loading="lazy" />
         </div>
     )
 }
@@ -19,7 +19,7 @@ const ImageItem = ({ src }) => {
 const CoverImageItem = ({ image, header, description }) => {
     return (
         <div className='w-full  rounded-xl bg-neutral-800 h-26 cursor-pointer flex items-center p-4 gap-4'>
-            <img src={image} alt='image' className='w-[30%] h-[100%] rounded' loading='lazy' />
+            <img src={image} alt='cover-image' className='w-[30%] h-[100%] rounded' loading='lazy' />
             <div className='text-sm' >
                 <h4>{header}</h4>
                 <p className='text-[10px] mt-2 text-neutral-500'>{description}</p>

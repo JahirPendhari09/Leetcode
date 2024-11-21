@@ -5,26 +5,33 @@ import { FiGithub } from "react-icons/fi";
 import { RiFacebookFill } from "react-icons/ri";
 import { BsThreeDots } from "react-icons/bs";
 import { useDispatch, useSelector } from 'react-redux';
-import { gotoLogin } from '../../redux/action';
+import { gotoSignup } from '../../redux/action';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const initialValue = {
-    username:'test@gmail.com', 
-    password:'Test@123'
+    username:'', 
+    password:'',
+    confirmPassword:'',
+    email:''
 }
 
-const Login = () => {
+const Signup = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const location = useLocation()
     const [formData, setFormData] = useState(initialValue)
     const [passwordType , setPasswordType] = useState(false)
     const auth = useSelector(store => store.reducer.auth)
+    const [isPasswordMatched, setPasswordMatched] = useState(false)
     const from = location.state?.from?.pathname || '/';
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(gotoLogin(formData))
+        if(formData.password !== formData.confirmPassword){
+            setPasswordMatched(true)
+            return 
+        }
+        dispatch(gotoSignup(formData))
         setFormData(initialValue)
     }
    
@@ -40,13 +47,21 @@ const Login = () => {
         }
     },[auth, navigate])
 
-    const handleSignupClick = () => {
-        navigate('/signup' ,{ state: { from: location }} )
+    const handleLoginClick = () => {
+        navigate('/login' ,{ state: { from: location } }  )
+    }
+
+    const onConfirmPasswordChange = () => {
+        if(formData.password !== formData.confirmPassword){
+            setPasswordMatched(true)
+        }else{
+            setPasswordMatched(false)
+        }
     }
 
     return (
-        <div className='flex justify-center items-center mt-8'>
-            <div className='w-[400px] pb-4 mb-10 border border-0.5 border-neutral-700 text-center rounded-md'>
+        <div className='flex justify-center items-center mt-8 mb-4'>
+            <div className='w-[400px] mb-10 pb-4 border border-0.5 border-neutral-700 text-center rounded-md'>
                 <div className='w-full flex  justify-center items-center flex-col mt-8'> 
                     <img  src='https://upload.wikimedia.org/wikipedia/commons/8/8e/LeetCode_Logo_1.png' className='w-16 h-16'  alt='link'/>
                     <h1 className='text-2xl italic'>LeetCode</h1>
@@ -54,7 +69,7 @@ const Login = () => {
                 <form onSubmit={handleSubmit} className='grid gap-6 grid-cols-1 mt-10 text-black'>
                     <div className='w-full cursor-pointer'>
                         <input
-                            placeholder='Username or E-mail'
+                            placeholder='Username'
                             name= 'username'
                             value={formData.username}
                             onChange={handleInput}
@@ -80,17 +95,47 @@ const Login = () => {
                             </div>
                         </div>
                     </div>
+                    <div className='w-full'>
+                        <div className='w-10/12 bg-white p-2 flex justify-between m-auto items-center border border-2 outline-none rounded-md'>
+                            <input
+                                placeholder= 'Confirm Password'
+                                name='confirmPassword'
+                                value={formData.confirmPassword}
+                                onChange={handleInput}
+                                onBlur={onConfirmPasswordChange}
+                                required={true}
+                                type={ passwordType ? 'text': 'password' }
+                                className='outline-none bg-white text-sm'
+  
+                            />
+                            <div className='cursor-pointer' onClick={() => setPasswordType(!passwordType)}>
+                               { passwordType ? <IoMdEyeOff size={20} color='black'/> : <IoMdEye color='black' size={20}/>}
+                            </div>
+                        </div>
+                        {isPasswordMatched && <div className='text-left w-10/12 m-auto text-red-500 text-sm mt-2'>The passwords you entered do not match.</div>}
+                    </div>
+                    <div className='w-full cursor-pointer'>
+                        <input
+                            placeholder='E-mail address'
+                            name= 'email'
+                            value={formData.username}
+                            onChange={handleInput}
+                            type='email'
+                            required={true}
+                            className='w-10/12 p-2 border border-2 outline-none rounded-md text-sm'
+                        />
+                    </div>
                     <div className='w-full text-white'>
                         <input
-                            value="Sign In"
+                            value="Sign Up"
                             type='submit'
                             className='w-10/12 p-3 bg-blue-500 cursor-pointer outline-none rounded-md'
                         />
                     </div>
                 </form>
-                <div className='flex justify-between w-10/12 m-auto mt-6 text-gray-400'>
-                    <div className='cursor-pointer'>Forgot Password?</div>
-                    <div className='cursor-pointer' onClick={handleSignupClick}>Sign Up</div>
+                <div className='flex justify-center gap-2 w-10/12 m-auto mt-6 text-gray-400'>
+                    <div className='cursor-pointer'>Have an account?</div>
+                    <div className='cursor-pointer' onClick={handleLoginClick} >Sign In</div>
                 </div>
                 <div className='mt-6'>
                     <div className='text-gray-400 '>or you can sign in with</div>
@@ -114,4 +159,4 @@ const Login = () => {
     )
 }
 
-export default Login
+export default Signup

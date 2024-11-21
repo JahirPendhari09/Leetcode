@@ -7,6 +7,8 @@ import EditorFooter from "./EditorFooter"
 import { LANGUAGES, languageMap, themeMap, themeOptions } from "../../static/editor"
 import PlaygroundHeader from "./PlaygroundHeader"
 import { postCode } from "../../services/platform"
+import { useLocation, useNavigate } from "react-router-dom"
+import { useSelector } from "react-redux"
 
 const Playground = ({ problem, setSolved }) => {
     const [extensions, setExtensions] = useState([javascript(), autocompletion()])
@@ -21,6 +23,9 @@ const Playground = ({ problem, setSolved }) => {
     const [numOfTestCaseShow, setNumOfTestCsesShow] = useState(2)
     const [codeError, setCodeError] = useState(false)
     const [runCodeLoading, setRuncodeLoading] = useState(false)
+    const auth = useSelector(store => store.reducer.auth)
+    const navigate = useNavigate()
+    const location = useLocation()
 
     const [settings, setSettings] = useState({
         fontSize: '16px',
@@ -78,6 +83,9 @@ const Playground = ({ problem, setSolved }) => {
     }
 
     const handleSubmit = async () => {
+        if(!auth){
+            navigate('/login',{ state: { from: location } })
+        }
         if (language.value !== 'javascript') {
             return alert(`${language.label} is not supported for production. We are currently working on it.`);
         }
@@ -108,6 +116,9 @@ const Playground = ({ problem, setSolved }) => {
         }
     }
     const handleRun = async () => {
+        if(!auth){
+            navigate('/login',{ state: { from: location } })
+        }
         if (language.value !== 'javascript') {
             return alert(`${language.label} is not supported for production. We are currently working on it.`);
         }

@@ -1,3 +1,4 @@
+import { CHANGE_TAB, LOGIN_SUCCESS, SIGNUP_SUCCESS } from "./actionTypes"
 
 const initialState = {
     auth: false,
@@ -6,10 +7,13 @@ const initialState = {
 
 export const reducer = ( state = initialState , {type, payload}) => {
     switch (type) {
-        case 'SUCCESS' : {
-            return 1
+        case LOGIN_SUCCESS : {
+            return {...state, auth: true}
         }
-        case 'CHANGE_TAB': {
+        case SIGNUP_SUCCESS : {
+            return {...state, auth: true}
+        }
+        case CHANGE_TAB : {
             return {...state, currTab: payload}
         }
         default : {
