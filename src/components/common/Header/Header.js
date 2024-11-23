@@ -15,7 +15,7 @@ const Header = () => {
   const tab = store.currTab
   const location = useLocation()
   const [problemExist , setProblemExist] = useState(false)
-  const auth = useSelector(store => store.reducer.auth)
+  const auth = useSelector(store => store.authReducer.auth)
 
   useEffect(() => {
     const { pathname } = location

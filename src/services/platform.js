@@ -17,3 +17,21 @@ export const postCode = ( payload )=>{
         .catch(err => err)
     )
 }
+
+export const userRegisteration = ( payload )=>{
+    return (
+        axios.post('https://leetcode-backend-j7gg.onrender.com/auth/register',payload)
+        // axios.post('http://localhost:4500/run-code/',payload)
+        .then(res => res)
+        .catch(err => err)
+    )
+}
+
+export const userLogin = ( payload )=>{
+    return (
+        axios.post('https://leetcode-backend-j7gg.onrender.com/auth/login',payload)
+        // axios.post('http://localhost:4500/run-code/',payload)
+        .then(res => res)
+        .catch(err => err)
+    )
+}

@@ -7,10 +7,11 @@ import { BsThreeDots } from "react-icons/bs";
 import { useDispatch, useSelector } from 'react-redux';
 import { gotoLogin } from '../../redux/action';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Loader from '../../components/common/Loader';
 
 const initialValue = {
-    username:'test@gmail.com', 
-    password:'Test@123'
+    username:'jahir', 
+    password:'12345'
 }
 
 const Login = () => {
@@ -19,7 +20,7 @@ const Login = () => {
     const location = useLocation()
     const [formData, setFormData] = useState(initialValue)
     const [passwordType , setPasswordType] = useState(false)
-    const auth = useSelector(store => store.reducer.auth)
+    const { auth, loading, error, user }= useSelector(store => store.authReducer)
     const from = location.state?.from?.pathname || '/';
 
     const handleSubmit = (e) => {
@@ -44,6 +45,10 @@ const Login = () => {
         navigate('/signup' ,{ state: { from: location }} )
     }
 
+    if (loading){
+		return <Loader/>
+	}
+
     return (
         <div className='flex justify-center items-center mt-8'>
             <div className='w-[400px] pb-4 mb-10 border border-0.5 border-neutral-700 text-center rounded-md'>
@@ -58,7 +63,6 @@ const Login = () => {
                             name= 'username'
                             value={formData.username}
                             onChange={handleInput}
-                            type='email'
                             required={true}
                             className='w-10/12 p-2 border border-2 outline-none rounded-md text-sm'
                         />

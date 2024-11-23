@@ -1,4 +1,7 @@
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
 
+export const FETCH_ERROR = 'FETCH_ERROR'
+export const FETCH_LOADING = 'FETCH_LOADING'
+
 export const CHANGE_TAB = 'CHANGE_TAB'
