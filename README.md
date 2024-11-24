@@ -36,6 +36,10 @@ The application is deployed on netlify and can be accessed [leetcode-by-jahir.ne
 
 ![Screenshot (1372)](https://github.com/user-attachments/assets/f800431f-6e98-4092-97a8-6af3d203e6f3)
 
+## Email Send once Signup
+
+
+![Screenshot (1579)](https://github.com/user-attachments/assets/4cee5acd-ffcd-4166-aa34-52bfaf1b5033)
 
 ## Performance and Lighthouse Score's
 
