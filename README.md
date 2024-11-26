@@ -13,6 +13,7 @@ This repository contains the code for Leetcode clone App using React and tailwin
   - Express.js
   - MongoDB
   - Mongoose
+  - nodemailer
 
 ## Deployment
 
@@ -76,6 +77,13 @@ The application is deployed on netlify and can be accessed [leetcode-by-jahir.ne
 
    <h3>All Post Code / run Program</h3>
    <pre><code>GET {{baseurl}}/run-code </code></pre>
+
+   <h3>Authentication</h3>
+   <h3>Login</h3>
+   <pre><code>POST {{baseurl}}/auth/logn </code></pre>
+
+   <h3>Register</h3>
+   <pre><code>POST {{baseurl}}/auth/register </code></pre>
 
  
    # Credits <br/>
