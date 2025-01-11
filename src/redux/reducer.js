@@ -1,8 +1,9 @@
-import { CHANGE_TAB, LOGIN_SUCCESS, SIGNUP_SUCCESS } from "./actionTypes"
+import { CHANGE_TAB, LOGIN_SUCCESS, LOGOUT_SUCCESS, SIGNUP_SUCCESS, VERIFY_EMAIL } from "./actionTypes"
 
 const initialState = {
     auth: false,
-    currTab: 2
+    currTab: 2,
+    isEmailVerified: false
 }
 
 export const reducer = ( state = initialState , {type, payload}) => {
@@ -15,6 +16,12 @@ export const reducer = ( state = initialState , {type, payload}) => {
         }
         case CHANGE_TAB : {
             return {...state, currTab: payload}
+        }
+        case LOGOUT_SUCCESS : {
+            return initialState
+        }
+        case VERIFY_EMAIL : {
+            return {...state, isEmailVerified: true}
         }
         default : {
             return state

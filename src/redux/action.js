@@ -1,4 +1,4 @@
-import { CHANGE_TAB, LOGIN_SUCCESS, SIGNUP_SUCCESS } from "./actionTypes"
+import { CHANGE_TAB, LOGIN_SUCCESS, LOGOUT_SUCCESS, SIGNUP_SUCCESS, VERIFY_EMAIL } from "./actionTypes"
 
 export const gotoLogin = (loginData) => (dispatch) => {
     return (
@@ -15,5 +15,17 @@ export const gotoSignup = (signupData) => (dispatch) => {
 export const changeTab = (tab) => (dispatch) => {
     return (
         dispatch({type: CHANGE_TAB, payload: tab})
+    )
+}
+
+export const logoutUser = () => (dispatch) => {
+    return (
+        dispatch({type: LOGOUT_SUCCESS })
+    )
+}
+
+export const verifyUserEmail = () => (dispatch) => {
+    return (
+        dispatch({type: VERIFY_EMAIL })
     )
 }
