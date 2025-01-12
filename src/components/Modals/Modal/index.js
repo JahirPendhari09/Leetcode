@@ -13,7 +13,7 @@ const Modal = ({ isOpen, onClose, children }) => {
 
   return (
     <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-60 flex justify-center items-center" onClick={handleOutsideClick}>
-      <div ref={modalRef}  className="bg-white p-4 rounded-md shadow-md relative" onClick={(e)=> e.stopPropagation()}>
+      <div ref={modalRef}  className="bg-white rounded-md shadow-md relative" onClick={(e)=> e.stopPropagation()}>
         <button
           className="close-button text-[30px] -top-1 absolute right-3"
           onClick={onClose}
