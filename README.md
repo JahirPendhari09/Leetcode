@@ -37,14 +37,30 @@ The application is deployed on netlify and can be accessed [leetcode-by-jahir.ne
 
 ![Screenshot (1372)](https://github.com/user-attachments/assets/f800431f-6e98-4092-97a8-6af3d203e6f3)
 
-## Email Send once Signup
 
+## Email Send Once User Sign Up
 
 ![Screenshot (1579)](https://github.com/user-attachments/assets/4cee5acd-ffcd-4166-aa34-52bfaf1b5033)
+
 
 ## Performance and Lighthouse Score's
 
 ![Screenshot (1096)](https://github.com/user-attachments/assets/83a81493-c761-48ca-b98f-75316ac2783a)
+
+
+## Verify Email Through OTP
+
+![Screenshot 2025-01-13 185250](https://github.com/user-attachments/assets/7a858d6f-69d0-4627-afb6-6b5aedaff601)
+
+
+## Send Email UI
+
+![Screenshot 2025-01-13 185121](https://github.com/user-attachments/assets/e8857db7-0ab8-4164-b989-cb13032bc1a3)
+
+
+## Verify OTP UI
+
+![Screenshot 2025-01-13 185233](https://github.com/user-attachments/assets/6e9a8e1d-59a9-490b-9b11-f2c13b0a27a5)
 
 
  # How to Run <br/>
