@@ -6,15 +6,17 @@ import Timer from '../Timer/Timer';
 import avatar from '../../../images/Jahir_Image.png'
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
-import { changeTab, logoutUser, verifyUserEmail } from '../../../redux/action';
+import { changeTab, logoutUser } from '../../../redux/action';
 import { iconsList } from '../../../static/profile';
-import { IoSettingsOutline } from "react-icons/io5";
+import { IoClose, IoSettingsOutline } from "react-icons/io5";
 import { PiSignOutFill } from "react-icons/pi";
 import { MdOutlineEventNote } from "react-icons/md";
 import { MdOutlineQueuePlayNext } from "react-icons/md";
 import { MdOutlineAddCircleOutline } from "react-icons/md";
 import { MdOutlineMarkEmailRead } from "react-icons/md";
 import { Modal } from '../../Modals/Modal';
+import { sendOtpOnEmail, verifyOtpOnEmail } from '../../../services/auth';
+import { VERIFY_EMAIL } from '../../../redux/actionTypes';
 
 
 const menuItems = [
@@ -34,14 +36,17 @@ const Header = () => {
   const tab = store.currTab
   const location = useLocation()
   const [problemExist, setProblemExist] = useState(false)
-  const { auth, isEmailVerified } = useSelector(store => store.reducer)
+  const { auth, isEmailVerified, email, username } = useSelector(store => store.reducer)
   const [showUser, setShowUser] = useState(false)
   const [showEmailModal, setShowEmailModal] = useState(false)
   const [emailSended, setEmailSended] = useState(false)
-  const [userEmail, setUserEmail] = useState('124')
-  const [otp, setOtp] = useState(["", "", "", ""]); 
+  const [userEmail, setUserEmail] = useState('')
+  const [otp, setOtp] = useState(["", "", "", ""]);
   const [isSubmitEnabled, setIsSubmitEnabled] = useState(false);
   const inputRefs = useRef([]);
+  const [time, setTime] = useState(300);
+  const [showToolTip, setShowToolTip] = useState('')
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const { pathname } = location
@@ -67,8 +72,7 @@ const Header = () => {
   }
 
   const handleVerifyEmail = () => {
-    // if(isEmailVerified) return 
-    // dispatch(verifyUserEmail())
+    if (isEmailVerified) return
     setShowEmailModal(true)
     setShowUser(false)
   }
@@ -87,8 +91,8 @@ const Header = () => {
     }
   }
 
-  const handleOtpChange = (index, value) => {
-    if (value.length > 1) return; 
+  const handleOTPChange = (index, value) => {
+    if (value.length > 1) return;
 
     const updatedOtp = [...otp];
     updatedOtp[index] = value;
@@ -99,7 +103,7 @@ const Header = () => {
     }
   };
 
-  const handleOtpKeyDown = (index, event) => {
+  const handleOTPKeyDown = (index, event) => {
     if (event.key === "Backspace" && !otp[index] && index > 0) {
       const updatedOtp = [...otp];
       updatedOtp[index - 1] = "";
@@ -108,9 +112,76 @@ const Header = () => {
     }
   };
 
-  const handleOtpSubmit = () => {
-    console.log("OTP Submitted:", otp.join(""));
+  const handleOTPSubmit = async () => {
+    setLoading(true)
+    try {
+      const userDetails = {
+        username,
+        email: email || userEmail,
+        otp: Number(otp.join(''))
+      }
+      const response = await verifyOtpOnEmail(userDetails)
+      setLoading(false)
+      if(response.status === 200) {
+        dispatch({ type: VERIFY_EMAIL })
+        setShowEmailModal(false)
+        setShowToolTip('Email address verified successfully.')
+        navigate('/' ,{ state: { from: location }} )
+      }else{
+        setShowToolTip(response.response.data.message)
+      }
+    } catch (err) {
+      setLoading(false)
+      console.log('Error while sending email: ', err)
+    }
   };
+
+  const handleResendOTP = () => {
+    if (time > 0) return
+    setOtp(["", "", "", ""])
+    setTime(300)
+    handleOtpSendClick()
+  }
+
+  const handleTimmer = () => {
+    if (time <= 0) return
+    setTime((time) => time - 1)
+  }
+
+  const handleCloseModal = () => {
+    setEmailSended(false)
+    setShowEmailModal(false)
+    setUserEmail('')
+    setLoading(false)
+    setShowToolTip('')
+  }
+
+  const handleOtpSendClick = async () => {
+    setLoading(true)
+    try {
+      const userDetails = {
+        username,
+        email: email || userEmail
+      }
+      await sendOtpOnEmail(userDetails)
+      setShowToolTip('The OTP has been sent to your email.')
+      setEmailSended(true)
+      setLoading(false)
+    } catch (err) {
+      setLoading(false)
+      console.log('Error while sending email: ', err)
+    }
+  }
+
+  useEffect(() => {
+    if (showToolTip) {
+      let timmer = setTimeout(() => {
+        setShowToolTip('')
+      }, 10000)
+
+      return () => clearTimeout(timmer)
+    }
+  }, [showToolTip])
   return (
     <>
       <nav className={`relative flex  w-full shrink-0 items-center  ${problemExist ? 'h-[50px] px-2' : ' h-[50px] bg-neutral-800 border-b border-neutral-600  px-5 '}  text-neutral-400`}>
@@ -185,7 +256,7 @@ const Header = () => {
             </div>
             <div className='flex flex-wrap gap-3 mt-6'>
               {iconsList?.length > 0 && iconsList.map((item) => (
-                <ListBarItem {...item} />
+                <ListBarItem {...item} key={item} />
               ))}
             </div>
             <div className="flex flex-col mt-4">
@@ -197,7 +268,7 @@ const Header = () => {
         </div>
       </div>}
 
-      <Modal isOpen={showEmailModal} onClose={() => setShowEmailModal(false)}>
+      <Modal isOpen={showEmailModal} onClose={handleCloseModal}>
         <div className="w-[400px] bg-neutral-800 rounded p-5">
           <div className="p-4 flex flex-col items-center">
             <h2 className="text-2xl font-bold text-white">Verify Your Email</h2>
@@ -216,8 +287,8 @@ const Header = () => {
                         key={index}
                         type="text"
                         value={digit}
-                        onChange={(e) => handleOtpChange(index, e.target.value)}
-                        onKeyDown={(e) => handleOtpKeyDown(index, e)}
+                        onChange={(e) => handleOTPChange(index, e.target.value)}
+                        onKeyDown={(e) => handleOTPKeyDown(index, e)}
                         ref={(el) => (inputRefs.current[index] = el)}
                         className="w-10 text-black h-10 text-center border border-gray-500 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
                         maxLength={1}
@@ -227,57 +298,81 @@ const Header = () => {
                   </div>
                 </div>
               ) : (
-                  <div>
-                    <label htmlFor="email" className="block text-gray-300 mb-2">
-                      Your Email Address
-                    </label>
-                    {userEmail ? (
-                      <p className="mt-2 text-gray-300">{userEmail}</p>
-                    ) : (
-                      <input
-                        id="email"
-                        type="email"
-                        placeholder="Please enter your email address here"
-                        value={userEmail}
-                        onChange={(e) => setUserEmail(e.target.value)}
-                        className="w-full p-2 border border-gray-500 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
-                      />
-                    )}
-                  </div>
-                )}
+                <div>
+                  <label htmlFor="email" className="block text-gray-300 mb-2">
+                    Your Email Address
+                  </label>
+                  {email ? (
+                    <p className="mt-2 text-gray-300">{email}</p>
+                  ) : (
+                    <input
+                      id="email"
+                      type="email"
+                      placeholder="Please enter your email address here"
+                      value={userEmail}
+                      onChange={(e) => setUserEmail(e.target.value)}
+                      className="w-full text-black p-2 border border-gray-500 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+                    />
+                  )}
+                </div>
+              )}
             </div>
 
-            <div className="mt-4 flex gap-5 items-center">
+            <div className="mt-4 flex gap-6 items-center">
               {emailSended && (
                 <button
-                  className={`p-3 rounded bg-green-700 text-white transition 
-                    ${isSubmitEnabled ? "hover:bg-green-800" : "opacity-50 cursor-not-allowed"}`
+                  className={`p-3 rounded bg-green-700 text-white transition flex gap-2 items-center
+                    ${isSubmitEnabled && !loading ? "hover:bg-green-800" : "opacity-50 cursor-not-allowed"}`
                   }
-                  onClick={handleOtpSubmit}
-                  disabled={!isSubmitEnabled}
+                  onClick={handleOTPSubmit}
+                  disabled={!isSubmitEnabled || loading}
                 >
-                  Submit
+                  {loading && <p className='loader'></p>} Submit
                 </button>
               )}
               {emailSended ? (
-                <button
-                  className="p-3 rounded border-green-500 border-2 text-green-500 hover:bg-green-500 hover:text-white transition"
-                  onClick={() => setOtp(["", "", "", ""])}
-                >
-                  Resend OTP
-                </button>
-              ) : (
-                <button
-                  onClick={() => setEmailSended(true)}
-                  className={`p-3 rounded bg-green-700 text-white transition 
-                    ${!userEmail ? "hover:bg-green-800" : "opacity-50 cursor-not-allowed"}`
+                <>
+                  <button
+                    className={`p-3 rounded border-green-500 border-2 text-white transition
+                    ${time > 0 ? "opacity-50 cursor-not-allowed" : 'hover:bg-green-800'}
+                  `}
+                    onClick={handleResendOTP}
+                    disabled={time > 0}
+                  >
+                    Resend OTP
+                  </button>
+                  <div>
+                    <Timer time={time} setTime={handleTimmer} />
+                  </div>
+                </>
+              ) :
+                (<button
+                  onClick={handleOtpSendClick}
+                  className={`p-3 rounded bg-green-700 text-white transition flex gap-2 items-center
+                        ${!loading && (email || userEmail) ? "hover:bg-green-800" : "opacity-50 cursor-not-allowed"}`
                   }
-                  disabled={!userEmail}
+                  disabled={loading || (email ? false : !userEmail)}
                 >
-                  Verify My Email
+                  {loading && <p className='loader'></p>} Verify My Email
                 </button>
-              )}
+                )
+              }
             </div>
+
+            {showToolTip !== '' && (
+              <div className="w-full flex justify-start mt-4">
+                <div className="text-sm p-2 border border-green-400 rounded flex items-center gap-4">
+                  <p>{showToolTip}</p>
+                  <span
+                    className="cursor-pointer"
+                    onClick={() => setShowToolTip('')}
+                    aria-label="Close alert"
+                  >
+                    <IoClose size={20} />
+                  </span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </Modal>

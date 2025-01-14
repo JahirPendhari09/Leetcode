@@ -20,7 +20,8 @@ const Signup = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const [formData, setFormData] = useState(initialValue)
-    const [passwordType , setPasswordType] = useState(false)
+    const [passwordType1 , setPasswordType1] = useState(false)
+    const [passwordType2 , setPasswordType2] = useState(false)
     const auth = useSelector(store => store.reducer.auth)
     const [isPasswordMatched, setPasswordMatched] = useState(false)
     const from = location.state?.from?.pathname || '/';
@@ -73,7 +74,6 @@ const Signup = () => {
                             name= 'username'
                             value={formData.username}
                             onChange={handleInput}
-                            type='email'
                             required={true}
                             className='w-10/12 p-2 border border-2 outline-none rounded-md text-sm'
                         />
@@ -86,12 +86,12 @@ const Signup = () => {
                                 value={formData.password}
                                 onChange={handleInput}
                                 required={true}
-                                type={ passwordType ? 'text': 'password' }
+                                type={ passwordType1 ? 'text': 'password' }
                                 className='outline-none bg-white text-sm'
   
                             />
-                            <div className='cursor-pointer' onClick={() => setPasswordType(!passwordType)}>
-                               { passwordType ? <IoMdEyeOff size={20} color='black'/> : <IoMdEye color='black' size={20}/>}
+                            <div className='cursor-pointer' onClick={() => setPasswordType1(!passwordType1)}>
+                               { passwordType1 ? <IoMdEyeOff size={20} color='black'/> : <IoMdEye color='black' size={20}/>}
                             </div>
                         </div>
                     </div>
@@ -104,12 +104,12 @@ const Signup = () => {
                                 onChange={handleInput}
                                 onBlur={onConfirmPasswordChange}
                                 required={true}
-                                type={ passwordType ? 'text': 'password' }
+                                type={ passwordType2 ? 'text': 'password' }
                                 className='outline-none bg-white text-sm'
   
                             />
-                            <div className='cursor-pointer' onClick={() => setPasswordType(!passwordType)}>
-                               { passwordType ? <IoMdEyeOff size={20} color='black'/> : <IoMdEye color='black' size={20}/>}
+                            <div className='cursor-pointer' onClick={() => setPasswordType2(!passwordType2)}>
+                               { passwordType2 ? <IoMdEyeOff size={20} color='black'/> : <IoMdEye color='black' size={20}/>}
                             </div>
                         </div>
                         {isPasswordMatched && <div className='text-left w-10/12 m-auto text-red-500 text-sm mt-2'>The passwords you entered do not match.</div>}
@@ -118,7 +118,7 @@ const Signup = () => {
                         <input
                             placeholder='E-mail address'
                             name= 'email'
-                            value={formData.username}
+                            value={formData.email}
                             onChange={handleInput}
                             type='email'
                             required={true}
