@@ -1,9 +1,11 @@
 import axios from "axios"
 
+const base_url = 'https://leetcode-backend-j7gg.onrender.com'
+// const base_url = 'http://localhost:4600'
+
 export const fetchProblem = (name)=>{
     return (
-        axios.post('https://leetcode-backend-j7gg.onrender.com/problem/generate-problem',{"name": name})
-        // axios.post('http://localhost:4500/problem/generate-problem',{"name": name})
+        axios.post(` ${base_url}/problem/generate-problem`, {"name": name})
        .then(res =>  res)
        .catch(err => err )
     )
@@ -11,8 +13,7 @@ export const fetchProblem = (name)=>{
 
 export const postCode = ( payload )=>{
     return (
-        axios.post('https://leetcode-backend-j7gg.onrender.com/run-code/',payload)
-        // axios.post('http://localhost:4500/run-code/',payload)
+        axios.post(`${base_url}/run-code/`, payload)
         .then(res => res)
         .catch(err => err)
     )

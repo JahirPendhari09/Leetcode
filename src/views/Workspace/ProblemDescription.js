@@ -27,11 +27,15 @@ const ProblemDescription = ({ problem, _solved }) => {
 	return (
 		<div className='bg-dark-layer-1 bg-neutral-800 h-full  rounded-xl border border-neutral-500 overflow-hidden'>
 			<div className='flex h-10 w-full items-center gap-4 pl-4  bg-dark-layer-2  text-white overflow-hidden bg-neutral-700'>
-				<div className={` flex justify-center gap-1 items-center cursor-pointer ${currTab === 1 ? 'font-bold':''}`} onClick={()=> setCurrTab(1)}>
+				<div 
+				   data-testid='description-tab'  
+				   className={` flex justify-center gap-1 items-center cursor-pointer ${currTab === 1 ? 'font-bold':''}`} 
+				   onClick={()=> setCurrTab(1)}
+				>
 				   <CgNotes  color="blue"/>
 					Description
 				</div>
-				<div className={`cursor-pointer ${currTab === 2 ? 'font-bold':''}`} onClick={()=> setCurrTab(2)}>
+				<div data-testid='submission-tab' className={`cursor-pointer ${currTab === 2 ? 'font-bold':''}`} onClick={()=> setCurrTab(2)}>
 					Submissions
 				</div>
 			</div>

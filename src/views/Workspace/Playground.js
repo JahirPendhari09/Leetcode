@@ -27,12 +27,6 @@ const Playground = ({ problem, setSolved }) => {
     const navigate = useNavigate()
     const location = useLocation()
 
-    const [settings, setSettings] = useState({
-        fontSize: '16px',
-        settingsModalIsOpen: false,
-        dropdownIsOpen: false,
-    })
-
     const extractFunctionInfo = (code, language) => {
         // Regular expressions for different languages
         const regexPatterns = {
@@ -170,8 +164,6 @@ const Playground = ({ problem, setSolved }) => {
             <Split className='h-full mb-0'  direction='vertical' sizes={[60, 40]} minSize={100}>
                 <div className='w-full h-full overflow-auto border border-neutral-500 rounded-xl bg-neutral-800'>
                     <PlaygroundHeader 
-                        settings={settings} 
-                        setSettings={setSettings} 
                         language={language} 
                         setLanguage={setLanguage} 
                         theme={theme} 
@@ -183,7 +175,7 @@ const Playground = ({ problem, setSolved }) => {
                         theme={themeMap[theme.value]}
                         onChange={onChange}
                         extensions={extensions}
-                        style={{ fontSize: settings.fontSize }}
+                        style={{ fontSize: '16px' }}
                     />
                 </div>
                 {

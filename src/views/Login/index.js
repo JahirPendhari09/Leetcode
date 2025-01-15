@@ -58,7 +58,6 @@ const Login = () => {
                             name= 'username'
                             value={formData.username}
                             onChange={handleInput}
-                            type='email'
                             required={true}
                             className='w-10/12 p-2 border border-2 outline-none rounded-md text-sm'
                         />
