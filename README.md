@@ -7,6 +7,7 @@ This repository contains the code for Leetcode clone App using React and tailwin
   - Javascrit
   - React
   - Tailwind css
+  - Jest Testing
     
 ## Technologies Used ( Backend )
   - Node.js
