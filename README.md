@@ -87,6 +87,13 @@ The application is deployed on netlify and can be accessed [leetcode-by-jahir.ne
    
   - Responsive for Mobile and Desktop
   - Languages support javascript, java and python
+  - Created login/signup pages with private authentication for user sessions.
+  - Dynamic problem generation.
+  - Users can run their solutions/code in multiple languages (JavaScript, Java, and Python).
+  - Multi-language and multi-theme support.
+  - Support for multiple test cases.
+  - When a new user registers, they receive an email from the Leetcode Clone team, enabling real-life communication achieved using Nodemailer.
+  - Added Jest tests to ensure the application works correctly.
 
    <h2>Endpoints</h2>
    <h3>Get Problem</h3>
