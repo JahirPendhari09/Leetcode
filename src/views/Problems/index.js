@@ -31,6 +31,7 @@ const CoverImageItem = ({ image, header, description }) => {
 const Problems = () => {
     const [tab, setTab] = useState(0)
     const [currWeek, setCurrWeek] = useState()
+    const [remainDayFromWeek, setRemainDayFromWeek] = useState(0)
 
     useEffect(() => {
         // Function to calculate the current week number
@@ -45,6 +46,35 @@ const Problems = () => {
         const currentWeek = getWeekNumber(new Date());
         setCurrWeek(currentWeek);
     }, []);
+
+    useEffect(() => {
+      // Function to get the start date of the current week
+      const getStartOfWeek = (date) => {
+          const day = date.getDay(); // 0 (Sunday) to 6 (Saturday)
+          const startOfWeek = new Date(date); // Copy the current date
+          startOfWeek.setDate(date.getDate() - day); // Set the start date to the previous Sunday
+          startOfWeek.setHours(0, 0, 0, 0); // Set hours to beginning of the day
+          return startOfWeek;
+      };
+  
+      // Function to get the end date of the current week
+      const getEndOfWeek = (date) => {
+          const startOfWeek = getStartOfWeek(date);
+          const endOfWeek = new Date(startOfWeek);
+          endOfWeek.setDate(startOfWeek.getDate() + 6); // Set end date to the following Saturday
+          endOfWeek.setHours(23, 59, 59, 999); // Set hours to end of the day
+          return endOfWeek;
+      };
+  
+      // Calculate remaining days in the current week
+      const today = new Date();
+      const endOfWeek = getEndOfWeek(today);
+      const daysRemaining = Math.ceil((endOfWeek.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+      setRemainDayFromWeek(daysRemaining-1)
+
+    }, []);
+
+
 
     return (
       <div className='bg-zinc-900 -mt-[25px] pt-14 pb-10 '>
@@ -133,7 +163,7 @@ const Problems = () => {
                       <div>Weekly Premium</div>
                       <div className='mt-[1px]'><IoMdHelpCircleOutline /></div>
                     </div>
-                    <div>5 Days left</div>
+                    <div>{remainDayFromWeek} Days left</div>
                   </div>
                   <div className='w-[80%] text-neutral-400 m-auto justify-between flex text-[10px] mt-4' >
                     <div className={`${currWeek === 1 ? 'rounded-full p-1 bg-[#ffa116] text-white' : 'p-1'} `}>W1</div>
