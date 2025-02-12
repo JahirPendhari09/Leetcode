@@ -195,7 +195,8 @@ const Header = () => {
                 <Link to='/' className={`${tab === 1 ? 'tabs' : ''}`} onClick={() => handleTab(1)}>Explore</Link>
                 <Link to='/problemset' className={`${tab === 2 ? 'tabs' : ''}`} onClick={() => handleTab(2)}>Problems</Link>
                 <Link to='/' className={`${tab === 3 ? 'tabs' : ''}`} onClick={() => handleTab(3)}>Contest</Link>
-                <Link to='/' className={`${tab === 4 ? 'tabs' : ''}`} onClick={() => handleTab(4)}>Discuss</Link>
+                {/* <Link to='/' className={`${tab === 4 ? 'tabs' : ''}`} onClick={() => handleTab(4)}>Discuss</Link> */}
+                <a href='https://leetcode.com/discuss/interview-question' target='_blank' rel='noreferrer' >Discuss</a>
                 <Link to='/' className={`${tab === 5 ? 'tabs' : ''}`} onClick={() => handleTab(5)}>Interview</Link>
                 <div className='flex gp-4 items-center text-yellow-600 '>
                   <Link to='/'>Store </Link>
