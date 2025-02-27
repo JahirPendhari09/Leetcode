@@ -1,7 +1,8 @@
 # Leetcode-clone
 
 ## Overview
-This repository contains the code for Leetcode clone App using React and tailwind css.
+This repository contains the code for Leetcode clone App using React and tailwind css. Leetode-clone is an online platform where students can practice data structure and algorithm problems. It is inspired by LeetCode.
+
 
 ## Technologies Used ( Frontend )
   - Javascrit
